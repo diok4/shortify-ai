@@ -1,9 +1,41 @@
-import styles from "./index.module.css";
+import Image from "next/image";
+import { RxExit } from "react-icons/rx";
+import { FaCircleUser } from "react-icons/fa6";
+import Link from "next/link";
+import { MdChat } from "react-icons/md";
+import { NavLink } from "@/shared/navlink";
+import { IoIosSettings } from "react-icons/io";
 
 export const NavBar = () => {
   return (
-    <div className={styles.container}>
-      <p>navbar</p>
+    <div className="w-[250px] h-screen py-3 px-5 border-gray-200 border-r flex flex-col justify-between">
+      <div>
+        <div className="flex items-center pb-2">
+          <Image src="/logo.png" alt="Logo" width={50} height={50} />
+          <h1 className="ml-2 font-medium">Shortify</h1>
+        </div>
+        <div className="flex flex-col items-center border-t border-gray-200 pt-2">
+          <FaCircleUser className="text-[60px] text-gray-400" />
+          <h2 className="text-lg font-normal">Diok Four</h2>
+          <p className="text-gray-700 text-sm">diok4@gmail.com</p>
+        </div>
+        <div className="flex flex-col mt-5 gap-2">
+          <NavLink href="/" exact>
+            <MdChat />
+            <span className="ml-2">Chat</span>
+          </NavLink>
+          <NavLink href="/settings" exact>
+            <IoIosSettings />
+            <span className="ml-2">Settings</span>
+          </NavLink>
+        </div>
+      </div>
+      <div className="border-t border-gray-200 pt-2">
+        <div className="flex justify-center py-1 rounded-lg items-center text-red-500 font-medium border hover:bg-red-500 hover:text-white transition ">
+          <RxExit />
+          <button className="ml-2">Logout</button>
+        </div>
+      </div>
     </div>
   );
 };
