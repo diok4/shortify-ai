@@ -13,7 +13,7 @@ export default function RootLayout({ children }: any) {
     <html lang="en" className={roboto.className}>
       <body>
         <div className="flex">
-          <AuthLayout />
+          {/* <AuthLayout /> */}
           <NavBar />
           <main className="w-full bg-blue-50 h-screen py-3 px-5">
             {children}

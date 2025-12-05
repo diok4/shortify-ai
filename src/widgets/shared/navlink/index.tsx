@@ -19,8 +19,8 @@ export const NavLink = ({ href, children, exact = false }: NavLinkProps) => {
       href={href}
       className={clsx(
         "flex items-center py-2 px-3 rounded-lg transition",
-        "hover:bg-blue-50 text-violet-700",
-        isActive && "bg-blue-100 text-violet-900"
+        "hover:bg-blue-50 text-blue-900",
+        isActive && "bg-blue-100 text-blue-800"
       )}
     >
       {children}
