@@ -1,12 +1,10 @@
 "use client";
-import { ChatInput } from "@/src/widgets/chat/chat-input";
-import { ChatOutput } from "@/src/widgets/chat/chat-output";
+import { ChatWrapper } from "@/src/features/chat/ui";
 
 export default function HomePage() {
   return (
-    <div>
-      <ChatOutput />
-      <ChatInput />
-    </div>
+    <>
+      <ChatWrapper />
+    </>
   );
 }
