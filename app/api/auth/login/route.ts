@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/src/shared/lib/prisma";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { signToken } from "@/src/shared/lib/jwt";
 
 export const POST = async (req: Request) => {
   try {
@@ -34,9 +34,7 @@ export const POST = async (req: Request) => {
       );
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
-      expiresIn: "7d",
-    });
+    const token = signToken({ id: user.id });
 
     const res = NextResponse.json({ ok: true });
 

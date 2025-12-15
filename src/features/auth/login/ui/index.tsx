@@ -28,6 +28,11 @@ export const LoginForm = ({ onSuccess }: { onSuccess: () => void }) => {
       if (!res) {
         onSuccess();
       }
+
+      if (res.ok) {
+        window.location.reload();
+      }
+
       console.log(res);
     } catch (error) {
       console.error(error);

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/src/shared/lib/prisma";
 import bcrypt from "bcryptjs";
+import { signToken } from "@/src/shared/lib/jwt";
 
 export const POST = async (req: Request) => {
   try {
@@ -31,7 +32,19 @@ export const POST = async (req: Request) => {
         avatarUrl: `https://api.dicebear.com/7.x/adventurer/svg?seed=${username}`,
       },
     });
-    return NextResponse.json({ ok: true });
+
+    const token = signToken({ id: user.id });
+
+    const response = NextResponse.json({ ok: true });
+
+    response.cookies.set("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    return response;
   } catch (error) {
     return NextResponse.json({ error: "Server failed" }, { status: 500 });
   }

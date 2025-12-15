@@ -6,10 +6,12 @@ import AuthLayout from "@/src/shared/layouts";
 import { NavBar } from "@/src/widgets/navbar";
 import { LoaderOverlay } from "@/src/shared/mantine/loader";
 import "@mantine/core/styles.css";
+import { useRouter } from "next/navigation";
 
 export default function ClientRoot({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<any>(null);
   const [loaded, setLoaded] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     async function loadUser() {
@@ -22,7 +24,11 @@ export default function ClientRoot({ children }: { children: ReactNode }) {
 
   async function reloadUser() {
     const res = await getMe();
-    setUser(res.user);
+
+    if (res.user) {
+      setUser(res.user);
+      router.refresh();
+    }
   }
 
   if (!loaded) {
