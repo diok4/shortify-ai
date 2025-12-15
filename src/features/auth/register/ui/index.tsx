@@ -15,6 +15,7 @@ export const RegisterForm = ({ onSuccess }: { onSuccess: () => void }) => {
     email: "",
     password: "",
   });
+  const [loaded, setLoaded] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));

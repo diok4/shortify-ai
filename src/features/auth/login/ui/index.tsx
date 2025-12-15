@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Input } from "@/src/shared/input";
 import { loginUser } from "../model";
+import { LoaderOverlay } from "@/src/shared/mantine/loader";
 
 interface IForm {
   username: string;
@@ -32,12 +33,12 @@ export const LoginForm = ({ onSuccess }: { onSuccess: () => void }) => {
       if (res.ok) {
         window.location.reload();
       }
-
       console.log(res);
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <form className="gap-3 flex flex-col" onSubmit={handleSubmit}>
       <Input
