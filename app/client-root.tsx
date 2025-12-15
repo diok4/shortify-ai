@@ -1,15 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { getMe } from "@/src/features/auth/me/model";
 import AuthLayout from "@/src/shared/layouts";
 import { NavBar } from "@/src/widgets/navbar";
+import { LoaderOverlay } from "@/src/shared/mantine/loader";
+import "@mantine/core/styles.css";
 
-export default function ClientRoot({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ClientRoot({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<any>(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -28,14 +26,20 @@ export default function ClientRoot({
   }
 
   if (!loaded) {
-    return <div className="text-center mt-10 text-gray-400">Loading...</div>;
+    return (
+      <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+        <LoaderOverlay />
+      </div>
+    );
   }
 
   return (
     <div className="flex w-full">
-      <AuthLayout user={user} open={!user} reloadUser={reloadUser} />
-
-      <NavBar user={user} />
+      {user ? (
+        <NavBar user={user} />
+      ) : (
+        <AuthLayout user={user} open={!user} reloadUser={reloadUser} />
+      )}
 
       <main className="w-full bg-blue-50 min-h-screen py-3 px-5">
         {children}

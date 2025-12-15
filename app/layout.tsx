@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
 import ClientRoot from "./client-root";
+import { MantineProvider } from "@mantine/core";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.className}>
       <body>
-        <ClientRoot>{children}</ClientRoot>
+        <MantineProvider>
+          <ClientRoot>{children}</ClientRoot>
+        </MantineProvider>
       </body>
     </html>
   );
