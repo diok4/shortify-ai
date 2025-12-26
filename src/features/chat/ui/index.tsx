@@ -1,13 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const STORAGE_KEY = "chat_history";
 
 export const ChatWrapper = () => {
   const [messages, setMessages] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      setMessages(JSON.parse(stored));
+    }
+    setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+  }, [messages, isLoaded]);
 
   async function handleSend(e: any) {
-    if (e) e.preventDefault();
+    e?.preventDefault();
     if (!text.trim()) return;
 
     const userMessage = text;
@@ -29,22 +45,15 @@ export const ChatWrapper = () => {
 
       const data = await res.json();
 
-      if (data.reply) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", text: data.reply, id: Date.now() + 1 },
-        ]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant",
-            text: "AI cannot answer",
-            id: Date.now() + 1,
-          },
-        ]);
-      }
-    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          text: data.reply || "AI cannot answer",
+          id: Date.now() + 1,
+        },
+      ]);
+    } catch {
       setMessages((prev) => [
         ...prev,
         {
@@ -59,43 +68,48 @@ export const ChatWrapper = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-6 px-4">
-      <div className="flex flex-col gap-3">
-        {messages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`p-3 rounded-xl max-w-[75%] whitespace-pre-line ${
-              msg.role === "user"
-                ? "self-end bg-blue-600 text-white"
-                : "self-start bg-gray-200 text-black"
-            }`}
-          >
-            {msg.text}
-          </div>
-        ))}
+    <div className="min-h-screen ">
+      <div className="max-w-[70vw] mx-auto px-4 py-6 flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
+          {messages.map((msg) => (
+            <div
+              key={msg.id}
+              className={`p-3 rounded-xl max-w-[75%] whitespace-pre-line ${
+                msg.role === "user"
+                  ? "self-end bg-blue-600 text-white"
+                  : "self-start bg-gray-200 text-black"
+              }`}
+            >
+              {msg.text}
+            </div>
+          ))}
 
-        {loading && (
-          <div className="p-3 rounded-xl bg-gray-300 text-gray-600 w-fit animate-pulse">
-            AI is typing...
-          </div>
-        )}
-      </div>
+          {loading && (
+            <div className="p-3 rounded-xl bg-gray-300 text-gray-600 w-fit animate-pulse">
+              AI is typing...
+            </div>
+          )}
+        </div>
 
-      <form onSubmit={handleSend} className="flex flex-col gap-2 mt-4 h-50">
-        <textarea
-          className="flex-1 border resize-none border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-blue-500 h-40"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Enter your text to shorten..."
-        />
-
-        <button
-          type="submit"
-          className="py-1 bg-blue-800 text-white px-4 rounded-lg hover:bg-blue-900 transition"
+        <form
+          onSubmit={handleSend}
+          className="sticky bottom-0 pt-2 pb-4  bg-blue-50"
         >
-          Send
-        </button>
-      </form>
+          <textarea
+            className="w-full resize-none border border-gray-200 bg-blue-50 rounded-lg px-3 py-2 shadow-sm h-32"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Enter your text to shorten..."
+          />
+
+          <button
+            type="submit"
+            className="mt-2 w-full py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition"
+          >
+            Send
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

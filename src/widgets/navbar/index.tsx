@@ -14,7 +14,7 @@ interface NavBarProps {
 
 export const NavBar = ({ user }: NavBarProps) => {
   return (
-    <div className="w-[250px] h-screen py-5 px-5 border-gray-200 border-r flex flex-col justify-between">
+    <div className="w-[250px] fixed h-screen py-5 px-5 border-gray-200 border-r flex flex-col justify-between">
       <div>
         <div className="flex items-center pb-2 font-extrabold bg-linear-to-r from-blue-800 via-blue-950 to-blue-900 bg-clip-text text-transparent  text-3xl select-none">
           <FaArrowDownWideShort className="text-blue-900" />
