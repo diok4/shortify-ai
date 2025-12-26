@@ -36,7 +36,7 @@ export async function POST(req: Request) {
         }),
       }
     );
-    console.log("🔵 RATE LIMIT HEADERS:");
+    console.log("RATE LIMIT HEADERS:");
     console.log(
       "Requests left (RPD):",
       groqRes.headers.get("x-ratelimit-remaining-requests")
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     );
 
     const data = await groqRes.json();
-    console.log("🔵 RAW GROQ RESPONSE:", data);
+    console.log("RAW GROQ RESPONSE:", data);
 
     if (data.error) {
       return NextResponse.json({ error: data.error.message });
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, reply });
   } catch (err) {
-    console.error("🔥 CHAT ERROR:", err);
+    console.error("CHAT ERROR:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

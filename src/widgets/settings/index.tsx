@@ -1,3 +1,9 @@
+import { LanguagePicker } from "@/src/shared/mantine/lang";
+
 export const SettingsWidget = () => {
-  return <>da</>;
+  return (
+    <>
+      <LanguagePicker />
+    </>
+  );
 };

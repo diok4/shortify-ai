@@ -6,7 +6,7 @@ export const ChatWrapper = () => {
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
 
-  async function handleSend(e?: any) {
+  async function handleSend(e: any) {
     if (e) e.preventDefault();
     if (!text.trim()) return;
 
