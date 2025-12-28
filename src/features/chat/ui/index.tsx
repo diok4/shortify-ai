@@ -68,8 +68,8 @@ export const ChatWrapper = () => {
   }
 
   return (
-    <div className="min-h-screen ">
-      <div className="max-w-[70vw] mx-auto px-4 py-6 flex flex-col gap-4">
+    <div className="min-h-screen w-full">
+      <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-3">
           {messages.map((msg) => (
             <div
@@ -93,10 +93,10 @@ export const ChatWrapper = () => {
 
         <form
           onSubmit={handleSend}
-          className="sticky bottom-0 pt-2 pb-4  bg-blue-50"
+          className="sticky bottom-0 pt-2 pb-4 text-gray-200"
         >
           <textarea
-            className="w-full resize-none border border-gray-200 bg-blue-50 rounded-lg px-3 py-2 shadow-sm h-32"
+            className="w-full resize-none border border-[#252525] text-gray-200 bg-[#1a1a1a] rounded-lg focus:outline-none focus:ring-0  px-3 py-2 shadow-sm h-32"
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter your text to shorten..."
@@ -104,7 +104,7 @@ export const ChatWrapper = () => {
 
           <button
             type="submit"
-            className="mt-2 w-full py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition"
+            className="mt-2 w-full py-2 bg-[#3631ca] text-white rounded-lg hover:bg-blue-900 transition"
           >
             Send
           </button>

@@ -40,14 +40,16 @@ export default function ClientRoot({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="flex w-full">
-      {user ? (
-        <NavBar user={user} />
-      ) : (
-        <AuthLayout user={user} open={!user} reloadUser={reloadUser} />
-      )}
+    <div className="flex w-full bg-[#121212]">
+      <div className="max-w-full md:w-[25%] ">
+        {user ? (
+          <NavBar user={user} />
+        ) : (
+          <AuthLayout user={user} open={!user} reloadUser={reloadUser} />
+        )}
+      </div>
 
-      <main className="w-full bg-blue-50 min-h-screen py-3 px-5">
+      <main className="max-w-full flex justify-center mx-auto w-[55%] text-center min-h-screen py-3">
         {children}
       </main>
     </div>
