@@ -33,7 +33,7 @@ export default function ClientRoot({ children }: { children: ReactNode }) {
 
   if (!loaded) {
     return (
-      <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+      <div className="absolute inset-0 flex items-center bg-[#121212] justify-center text-gray-400">
         <LoaderOverlay />
       </div>
     );

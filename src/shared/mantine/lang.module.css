@@ -7,24 +7,19 @@
   border-radius: var(--mantine-radius-md);
   border: 1px solid rgba(128, 128, 128, 0.188);
   transition: background-color 150ms ease;
-  background-color: white;
-  @mixin hover {
-    background-color: light-dark(
-      var(--mantine-color-gray-0),
-      var(--mantine-color-dark-5)
-    );
-  }
+  background-color: rgba(90, 90, 90, 0.347);
+  color: rgba(90, 90, 90, 0.347);
 }
 
 .label {
   font-weight: 500;
   font-size: var(--mantine-font-size-sm);
+  color: white;
 }
 
 .icon {
   transition: transform 150ms ease;
   transform: rotate(0deg);
-
   [data-expanded] & {
     transform: rotate(180deg);
   }

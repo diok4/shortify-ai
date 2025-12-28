@@ -74,10 +74,10 @@ export const ChatWrapper = () => {
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`p-3 rounded-xl max-w-[75%] whitespace-pre-line ${
+              className={`p-3 rounded-xl max-w-[75%] whitespace-pre-line border border-[#4c4c4d63] ${
                 msg.role === "user"
-                  ? "self-end bg-blue-600 text-white"
-                  : "self-start bg-gray-200 text-black"
+                  ? "self-end bg-[#3b389d] text-white"
+                  : "self-start bg-[#252525] text-gray-200"
               }`}
             >
               {msg.text}
@@ -93,7 +93,7 @@ export const ChatWrapper = () => {
 
         <form
           onSubmit={handleSend}
-          className="sticky bottom-0 pt-2 pb-4 text-gray-200"
+          className="sticky bottom-0 pb-4 text-gray-200 backdrop-blur-sm bg-[#1a1a1a96]"
         >
           <textarea
             className="w-full resize-none border border-[#252525] text-gray-200 bg-[#1a1a1a] rounded-lg focus:outline-none focus:ring-0  px-3 py-2 shadow-sm h-32"
@@ -104,7 +104,7 @@ export const ChatWrapper = () => {
 
           <button
             type="submit"
-            className="mt-2 w-full py-2 bg-[#3631ca] text-white rounded-lg hover:bg-blue-900 transition"
+            className="mt-2 w-full py-2 bg-[#3b389d] text-white rounded-lg hover:bg-[#3f3bb3] cursor-pointer transition"
           >
             Send
           </button>
