@@ -93,10 +93,10 @@ export const ChatWrapper = () => {
 
         <form
           onSubmit={handleSend}
-          className="sticky bottom-0 pb-4 text-gray-200 backdrop-blur-sm bg-[#1a1a1a96]"
+          className="sticky bottom-0 pb-4 text-gray-200 backdrop-blur-sm"
         >
           <textarea
-            className="w-full resize-none border border-[#252525] text-gray-200 bg-[#1a1a1a] rounded-lg focus:outline-none focus:ring-0  px-3 py-2 shadow-sm h-32"
+            className="w-full resize-none border border-[#252525] text-gray-200 bg-[#1a1a1a] rounded-lg focus:outline-none focus:ring-0  px-3 py-2 h-32"
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter your text to shorten..."
